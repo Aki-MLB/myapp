@@ -4,6 +4,8 @@ import HomeComponent from "@/components/Main.vue";
 import LoginComponent from "@/components/Login.vue";
 import RegisterComponent from "@/components/Register.vue";
 import ApplicationComponent from "@/components/Application.vue";
+import DashBoardComponent from "@/components/DashBoard.vue";
+
 
 
 Vue.use(VueRouter);
@@ -39,6 +41,14 @@ const routes = [
     component: ApplicationComponent,
     meta: {
       title: "application"
+    }
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: DashBoardComponent,
+    meta: {
+      title: "dashboard"
     }
   },
 ];
