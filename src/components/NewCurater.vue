@@ -2,14 +2,14 @@
 <v-app>
     <v-card width="400px" class="mx-auto mt-5">
         <v-card-title>
-            <h1 class="display-1">ログイン</h1>
+            <h1 class="display-1">キュレーター応募</h1>
         </v-card-title>
         <v-card-text>
             <v-form>
                 <v-text-field 
                 prepend-icon="mdi-account-circle" 
-                label="email address" 
-                v-model="email"
+                label="mail address" 
+                v-model="mail"
                 />
                 <v-text-field 
                 v-bind:type="showPassword ? 'text' : 'password'"
@@ -20,7 +20,7 @@
                 v-model="password" 
                 />
                 <v-card-actions>
-                <v-btn class="info" @click="login()">ログイン</v-btn> 
+                <v-btn class="info" @click="submit">ログイン</v-btn> 
                 </v-card-actions>
             </v-form>
         </v-card-text>
@@ -29,31 +29,19 @@
 </template>
 <script>
 import { defineComponent } from "@vue/composition-api";
-import axios from '@/plugins/axios-for-auth.js';
+
 export default defineComponent({
     name: 'App',
     data(){
     return {
       showPassword : false,
-      email:'',
+      name:'',
       password:'',
     }
   },
     methods:{
-    login(){
-      axios.post(
-        '/accounts:signInWithPassword?key=AIzaSyA3vtf5jZbv_W6NuF5GedwZleGvqKnbDew',
-        {
-          email: this.email,
-          password: this.password,
-          returnSecureToken: true
-        }
-      ).then((response) => {
-        this.$store.commit('updateIdToken', response.data.idToken)
-        this.$router.push('/dashboard');
-      });
-      this.email = "";
-      this.password = "";
+    submit(){
+      console.log(this.name,this.password)
     }
   },
 

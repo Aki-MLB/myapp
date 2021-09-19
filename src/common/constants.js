@@ -1,5 +1,5 @@
 export default {
-  menuItems: [
+  authItems: [
     {
       name: 'Mail',
       url: '#'
@@ -7,6 +7,20 @@ export default {
     {
         name: 'Logout',
         url: '#'
+      },
+      {
+        name: 'Dashboard',
+        url: '/DashBoard'
+      },
+  ],
+  menuItems: [
+    {
+      name: '新規登録',
+      url: '/Register'
+    },
+    {
+        name: 'Login',
+        url: '/Login'
       },
   ]
 }

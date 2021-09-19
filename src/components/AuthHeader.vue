@@ -10,8 +10,8 @@
    <v-btn color="primary" v-if="isloggedIn">検索</v-btn>
 </v-text-field>
     <v-spacer></v-spacer>
-    <v-tabs v-if ="!isloggedIn">
-            <v-tab v-for="(menuItem, index) in menuItems" :key="index">
+    <v-tabs>
+      <v-tab v-for="(authItem, index) in authItems" :key="index">
         {{ menuItem.name }}
       </v-tab>
     </v-tabs>
@@ -26,7 +26,7 @@ export default defineComponent({
   data() {
     return {
       drawer: false,
-      menuItems: constants.menuItems
+      authItems: constants.authItems,
     };
   }
 });

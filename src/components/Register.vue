@@ -8,8 +8,8 @@
             <v-form>
                 <v-text-field 
                 prepend-icon="mdi-account-circle" 
-                label="mail address" 
-                v-model="mail"
+                label="email address"
+                v-model="email"
                 />
                 <v-text-field 
                 v-bind:type="showPassword ? 'text' : 'password'"
@@ -20,7 +20,7 @@
                 v-model="password" 
                 />
                 <v-card-actions>
-                <v-btn class="info" @click="submit">メール送信</v-btn> 
+                <v-btn class="info" @click="register()">メール送信</v-btn> 
                 </v-card-actions>
             </v-form>
         </v-card-text>
@@ -29,21 +29,34 @@
 </template>
 <script>
 import { defineComponent } from "@vue/composition-api";
+import axios from '@/plugins/axios-for-auth.js'
 
 export default defineComponent({
     name: 'App',
     data(){
     return {
       showPassword : false,
-      name:'',
+      email:'',
       password:'',
     }
   },
     methods:{
-    submit(){
-      console.log(this.name,this.password)
+    register(){
+      axios.post(
+        '/accounts:signUp?key=AIzaSyA3vtf5jZbv_W6NuF5GedwZleGvqKnbDew',
+        {
+          email: this.email,
+          password: this.password,
+          returnSecureToken: true
+        }
+      ).then((response) => {
+        this.$store.commit('updateIdToken', response.data.idToken);
+        this.$router.push('/dashboard');
+      });
+      this.email = "";
+      this.password = "";
     }
+  }
   },
-
-});
+);
 </script>

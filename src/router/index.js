@@ -5,7 +5,7 @@ import LoginComponent from "@/components/Login.vue";
 import RegisterComponent from "@/components/Register.vue";
 import ApplicationComponent from "@/components/Application.vue";
 import DashBoardComponent from "@/components/DashBoard.vue";
-
+import store from '@/store';
 
 
 Vue.use(VueRouter);
@@ -15,25 +15,37 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeComponent,
-    meta: {
-      title: "home"
-    }
+    beforeEnter(to, from, next) {//追記
+      if (store.getters.idToken) {//すでにidTokenがあれば、"/"に飛ばす
+        next("/dashboard");
+      } else { //なければそのまま"/home"に
+        next();
+      }
+    },
   },
   {
     path: "/login",
     name: "login",
     component: LoginComponent,
-    meta: {
-      title: "login"
-    }
+    beforeEnter(to, from, next) {//追記
+      if (store.getters.idToken) {//すでにidTokenがあれば、"/"に飛ばす
+        next("/dashboard");
+      } else { //なければそのまま"/login"に
+        next();
+      }
+    },
   },
   {
     path: "/register",
     name: "register",
     component: RegisterComponent,
-    meta: {
-      title: "register"
-    }
+    beforeEnter(to, from, next) {//追記
+      if (store.getters.idToken) {//すでにidTokenがあれば、"/"に飛ばす
+        next("/dashboard");
+      } else { //なければそのまま"/register"に
+        next();
+      }
+    },
   },
   {
     path: "/application",
@@ -47,9 +59,13 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: DashBoardComponent,
-    meta: {
-      title: "dashboard"
-    }
+    beforeEnter(to, from, next) {//追記
+      if (store.getters.idToken) {//すでにidTokenがあれば、"/"に飛ばす
+        next("/dashboard");
+      } else { //なければそのまま"/login"に
+        next("/login");
+      }
+    },
   },
 ];
 
